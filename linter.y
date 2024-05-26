@@ -24,7 +24,7 @@ extern char *lineptr;
 %%
 
 sentencias 	:
-		| sentencias sentencia {printf("Compilación exitosa!!!!\n");}
+		| sentencias sentencia {printf("El código cumple con las reglas gramaticales: ha compilado!\n");}
 
 
 sentencia 	: decvar
@@ -181,7 +181,7 @@ void getElements(char string[], char* elementList[], int* counter){
 	}
 
 	if (*counter ==30 && token != NULL) {
-		printf("Error: Se superó el número de elementos en una línea\n");
+		printf("Error: Se superó el número máximo de elementos permitidos en una línea.\n");
 	}
 	
 }
@@ -202,231 +202,240 @@ int validarExpresion(const char *cadena) {
 
 void structureIf(char* ifSentence[]){
 	if (strcmp(ifSentence[1], "(")!=0) {
-		printf ("La cadena %s no pertenece a la estructura del if", ifSentence[1]);
-		printf ("\nHace falta el paréntesis de apertura para identificar donde empieza la condición.\n");
+		printf ("El símbolo %s no pertenece a la estructura del if.\n", ifSentence[1]);
+		printf ("Se esperaba un paréntesis de apertura '(' para iniciar la condición del if.\n");
 	} else if(!validarExpresion(ifSentence[2])){
-                printf("No se está escribiendo correctamente el identificador de la variable, o no es del mismo tipo.\n");
-                printf("Recuerde que los identificadores de variables pueden contener únicamente letras mayúsculas, minúsculas o números\n");
+                printf("El identificador %s no es válido o no coincide con el tipo esperado.\n", ifSentence[2]);
+                printf("Recuerde que los identificadores deben contener solo letras y números.\n");
         } else if((strcmp(ifSentence[3], "<") != 0) && (strcmp(ifSentence[3], ">") != 0) && (strcmp(ifSentence[3], "<=") != 0) && (strcmp(ifSentence[3], ">=") != 0) && (strcmp(ifSentence[3], "==")!=0) && (strcmp(ifSentence[3], "!=")!=0) ){
-                printf("Hace falta un operador que indica la condición.\n");
-                printf("Recuerda que los operadores más utilizados para las condiciones son '<','>','<=','>=','==','!='.\n");
+                printf("Falta un operador relacional válido para la condición del if.\n");
+                printf("Los operadores relacionales permitidos son: '<', '>', '<=', '>=', '==', '!='.\n");
         } else if(!validarExpresion(ifSentence[4])){
-                printf("No se está escribiendo correctamente el identificador de la variable, o no es del mismo tipo.\n");
-                printf("Recuerde que los identificadores de variables pueden contener únicamente letras mayúsculas, minúsculas o números\n");
+                printf("El identificador %s no es válido o no coincide con el tipo esperado.\n", ifSentence[4]);
+                printf("Recuerde que los identificadores deben contener solo letras y números.\n");
 	} else if (strcmp (ifSentence[5], ")")!=0) {
-		printf ("La cadena %s no pertenece a la estructura del if", ifSentence[5]);
-		printf ("\nHace falta el paréntesis de cierre para identificar donde finaliza la condición.\n");
+		printf ("El símbolo %s no pertenece a la estructura del if.\n", ifSentence[5]);
+		printf ("Se esperaba un paréntesis de cierre ')' para finalizar la condición del if.\n");
 	} else if (strcmp (ifSentence[6], "{")!=0) {
-                printf ("La cadena %s no pertenece a la estructura del if", ifSentence[6]);
-                printf ("\nHace falta el corcherte de apertura para identificar las sentencias. \n");
+                printf ("El símbolo %s no pertenece a la estructura del if.\n", ifSentence[6]);
+                printf ("Se esperaba una llave de apertura '{' para iniciar el bloque de código del if.\n");
       	}
-	printf("La estructura del if es:if ( condición ) {\n}\n"); 
+	printf("Recuerde que la estructura correcta del if es: if ( condición ) { ... }\n"); 
 }
 
 void structureWhile(char* whileSentence[]){
         if (strcmp(whileSentence[1], "(")!=0) {
-                printf ("La cadena %s no pertenece a la estructura del while", whileSentence[1]);
-                printf ("\nHace falta el paréntesis de apertura para identificar donde empieza la condición.\n");
+                printf ("El símbolo %s no pertenece a la estructura del while.\n", whileSentence[1]);
+                printf ("Se esperaba un paréntesis de apertura '(' para iniciar la condición del while.\n");
         } else if (!validarExpresion(whileSentence[2])) {
-                printf("No se está escribiendo correctamente el identificador de la variable, o no es del mismo tipo.\n");
-                printf("Recuerde que los identificadores de variables pueden contener únicamente letras mayúsculas, minúsculas o números\n");
+                printf("El identificador %s no es válido o no coincide con el tipo esperado.\n", whileSentence[2]);
+                printf("Recuerde que los identificadores deben contener solo letras y números.\n");
         } else if((strcmp(whileSentence[3], "<") != 0) && (strcmp(whileSentence[3], ">") != 0) && (strcmp(whileSentence[3], "<=") != 0) && (strcmp(whileSentence[3], ">=") != 0) && (strcmp(whileSentence[3], "==")!=0) && (strcmp(whileSentence[3], "!=")!=0) ){
-                printf("Hace falta un operador que indica la condición.\n");
-                printf("Recuerda que los operadores más utilizados para las condiciones son '<','>','<=','>=','==','!='.\n");
+                printf("Falta un operador relacional válido para la condición del while.\n");
+                printf("Los operadores relacionales permitidos son: '<', '>', '<=', '>=', '==', '!='.\n");
         } else if (!validarExpresion(whileSentence[4])){
-                printf("No se está escribiendo correctamente el identificador de la variable, o no es del mismo tipo.\n");
-                printf("Recuerde que los identificadores de variables pueden contener únicamente letras mayúsculas, minúsculas o números\n");
+                printf("El identificador %s no es válido o no coincide con el tipo esperado.\n", whileSentence[4]);
+                printf("Recuerde que los identificadores deben contener solo letras y números.\n");
 	} else if (strcmp (whileSentence[5], ")")!=0) {
-                printf ("La cadena %s no pertenece a la estructura del while", whileSentence[5]);
-                printf ("\nHace falta el paréntesis de cierre para identificar donde finaliza la condición.\n");
+                printf ("El símbolo %s no pertenece a la estructura del while.\n", whileSentence[5]);
+                printf ("Se esperaba un paréntesis de cierre ')' para finalizar la condición del while.\n");
         } else if (strcmp (whileSentence[6], "{")!=0) {
-                printf ("La cadena %s no pertenece a la estructura del while", whileSentence[6]);
-                printf ("\nHace falta el corcherte de apertura para identificar las sentencias. \n");
+                printf ("El símbolo %s no pertenece a la estructura del while.\n", whileSentence[6]);
+                printf ("Se esperaba una llave de apertura '{' para iniciar el bloque de código del while.\n");
         }
-        printf("Recuerde que la condición debe tener el mismo tipo de dato. La estructura del while es: while ( condición ) {\n}\n");
+        printf("Recuerde que la condición del while debe comparar elementos del mismo tipo.\n");
+        printf("La estructura correcta del while es: while ( condición ) { ... }\n");
 }
 
 
 void structureIfElse(char* ifSentence[]){
         if (strcmp(ifSentence[1], "(")!=0) {
-                printf ("La cadena %s no pertenece a la estructura del if", ifSentence[1]);
-                printf ("\nHace falta el paréntesis de apertura para identificar donde empieza la condición.\n");
+                printf ("El símbolo %s no pertenece a la estructura del if-else.\n", ifSentence[1]);
+                printf ("Se esperaba un paréntesis de apertura '(' para iniciar la condición del if.\n");
         } else if(!validarExpresion(ifSentence[2])){
-                printf("No se está escribiendo correctamente el identificador de la variable, o no es del mismo tipo.\n");
-                printf("Recuerde que los identificadores de variables pueden contener únicamente letras mayúsculas, minúsculas o números\n");
+                printf("El identificador %s no es válido o no coincide con el tipo esperado.\n", ifSentence[2]);
+                printf("Recuerde que los identificadores deben contener solo letras y números.\n");
         } else if((strcmp(ifSentence[3], "<") != 0) && (strcmp(ifSentence[3], ">") != 0) && (strcmp(ifSentence[3], "<=") != 0) && (strcmp(ifSentence[3], ">=") != 0) && (strcmp(ifSentence[3], "==")!=0) && (strcmp(ifSentence[3], "!=")!=0) ){
-                printf("Hace falta un operador que indica la condición.\n");
-                printf("Recuerda que los operadores más utilizados para las condiciones son '<','>','<=','>=','==','!='.\n");
+                printf("Falta un operador relacional válido para la condición del if.\n");
+                printf("Los operadores relacionales permitidos son: '<', '>', '<=', '>=', '==', '!='.\n");
         } else if(!validarExpresion(ifSentence[4])){
-                printf("No se está escribiendo correctamente el identificador de la variable, o no es del mismo tipo.\n");
-                printf("Recuerde que los identificadores de variables pueden contener únicamente letras mayúsculas, minúsculas o números\n");
+                printf("El identificador %s no es válido o no coincide con el tipo esperado.\n", ifSentence[4]);
+                printf("Recuerde que los identificadores deben contener solo letras y números.\n");
  
 	} else if (strcmp (ifSentence[5], ")")!=0) {
-                printf ("La cadena %s no pertenece a la estructura del if", ifSentence[5]);
-                printf ("\nHace falta el paréntesis de cierre para identificar donde finaliza la condición.\n");
+                printf ("El símbolo %s no pertenece a la estructura del if-else.\n", ifSentence[5]);
+                printf ("Se esperaba un paréntesis de cierre ')' para finalizar la condición del if.\n");
         } else if (strcmp (ifSentence[6], "{")!=0) {
-                printf ("La cadena %s no pertenece a la estructura del if", ifSentence[6]);
-                printf ("\nHace falta el corchete de apertura para identificar las sentencias del if. \n");
+                printf ("El símbolo %s no pertenece a la estructura del if-else.\n", ifSentence[6]);
+                printf ("Se esperaba una llave de apertura '{' para iniciar el bloque de código del if.\n");
         } else if (strcmp (ifSentence[7], "}")!=0) {
-		printf ("La cadena %s no pertenece a la estructura del if", ifSentence[7]);
-                printf ("\nHace falta el corchete de cierre para identificar las sentencias del if. \n");
+		printf ("El símbolo %s no pertenece a la estructura del if-else.\n", ifSentence[7]);
+                printf ("Se esperaba una llave de cierre '}' para finalizar el bloque de código del if.\n");
 	} else if (strcmp (ifSentence[8], "else")!=0) {
-                printf ("La cadena %s no pertenece a la estructura del if", ifSentence[8]);
-                printf ("\nHace falta la palabra else o está mal escrita. \n");
+                printf ("La palabra clave %s no se encuentra o está mal escrita.\n", ifSentence[8]);
+                printf ("Se esperaba la palabra clave 'else' para indicar el bloque alternativo.\n");
         } else if (strcmp (ifSentence[9], "{")!=0) {
-                printf ("La cadena %s no pertenece a la estructura del if", ifSentence[9]);
-                printf ("\nHace falta el corchete de apertura para identificar las sentencias del else. \n");
+                printf ("El símbolo %s no pertenece a la estructura del if-else.\n", ifSentence[9]);
+                printf ("Se esperaba una llave de apertura '{' para iniciar el bloque de código del else.\n");
         } else if (strcmp (ifSentence[10], "}")!=0) {
-                printf ("La cadena %s no pertenece a la estructura del if", ifSentence[10]);
-                printf ("\nHace falta el corchete de cierre para identificar las sentencias del else. \n");
+                printf ("El símbolo %s no pertenece a la estructura del if-else.\n", ifSentence[10]);
+                printf ("Se esperaba una llave de cierre '}' para finalizar el bloque de código del else.\n");
 	}
+        printf("Recuerde que la estructura correcta del if-else es:\n");
+        printf("if ( condición ) { ... } else { ... }\n");
 }
 
 void structureScanf(char* scanfSentence[]) {
 	if (strcmp(scanfSentence[1], "(")!=0) {
-		printf ("Hace falta el símbolo '(' de apertura.\n");
+		printf ("Falta el paréntesis de apertura '(' después de la función scanf.\n");
 	} else if (!isString(scanfSentence[2])) {
-		printf ("No está escribiendo el valor string, o no se está escribiendo correctamente.\n");
+		printf ("El segundo argumento de scanf debe ser una cadena de formato válida.\n");
+		printf ("Asegúrese de que la cadena esté entre comillas dobles \"...\".\n");
 	} else if (strcmp(scanfSentence[3], ",")!=0) {
-		printf ("No se encuentra el símbolo ','.\n");
+		printf ("Falta la coma ',' para separar los argumentos de scanf.\n");
 	} else if (!validarExpresion(scanfSentence[4])) {
-		printf ("No se está escribiendo o se está escribiendo incorrectamente el identificador.\n");
+		printf ("El identificador %s no es válido para almacenar el valor leído por scanf.\n", scanfSentence[4]);
+		printf ("Los identificadores deben contener solo letras y números.\n");
 	} else if (strcmp(scanfSentence[5], ")")!=0) {
-		printf ("Hace falta el símbolo ')' de cierre.\n");
+		printf ("Falta el paréntesis de cierre ')' para finalizar la función scanf.\n");
 	}
+        printf("Recuerde que la estructura correcta de scanf es:\n");
+        printf("scanf(\"formato\", &variable);\n");
 }
 
 void structureCout(char* coutSentence[]) {
 	if (strcmp(coutSentence[1], "<<")!=0) {
-		printf ("Hace falta el símbolo '<<' el cuál da paso al mensaje que se desea mostrar por pantalla.\n");
+		printf ("Falta el operador de inserción '<<' después de cout.\n");
 	} else if(!isString(coutSentence[2])) {
 		if (!validarExpresion(coutSentence[2])) {
-			printf ("No se está escribiendo o no se encuentra un identificador de variable, recuerde que puede contener mayúsculas, minúsculas y números.\n");
+			printf ("El elemento a imprimir no es un identificador válido.\n");
+			printf ("Los identificadores deben contener solo letras y números.\n");
 		} else {
-			printf ("No se está escribiendo o no se encuentra el mensaje, recuerde que debe ir dentro de comillas.\n");
+			printf ("El elemento a imprimir debe ser una cadena entre comillas dobles \"...\" o un identificador válido.\n");
 		}
 	} else if (strcmp(coutSentence[3], ";")!=0) {
-                printf ("Hace falta el símbolo ';' que indica el final de la línea de cout.\n");
+                printf ("Falta el punto y coma ';' al final de la sentencia cout.\n");
         }
+        printf("Recuerde que la estructura correcta de cout es:\n");
+        printf("cout << \"mensaje\" << variable << ...;\n");
 }
 
 void structureCin(char* cinSentence[]) {
         if (strcmp(cinSentence[1], ">>")!=0) {
-                printf ("Hace falta el símbolo '>>' el cuál da paso a la variable que se desea leer.\n");
+                printf ("Falta el operador de extracción '>>' después de cin.\n");
         } else if(!validarExpresion(cinSentence[2])) {
-        	printf ("No se está escribiendo o no se encuentra un identificador de variable, recuerde que puede contener mayúsculas, minúsculas y números, sin espacios.\n");
+        	printf ("El identificador %s no es válido para almacenar el valor leído por cin.\n", cinSentence[2]);
+                printf ("Los identificadores deben contener solo letras y números, sin espacios.\n");
         } else if (strcmp(cinSentence[3], ";")!=0) {
-		printf ("Hace falta el símbolo ';' que indica el final de la línea de cin.\n");
+		printf ("Falta el punto y coma ';' al final de la sentencia cin.\n");
 	}
+        printf("Recuerde que la estructura correcta de cin es:\n");
+        printf("cin >> variable;\n");
 }
 
 
 void structureAss(char* assSentence[]){
         if (strcmp(assSentence[1], "=")!=0) {
-                printf ("La cadena %s no pertenece a la estructura de asignación o no se encuentra en el orden correcto.", assSentence[1]);
-                printf ("\nHace falta el símbolo '=' que hace referencia a lo que se va asignar.\n");
-        } else if (!isNumber(assSentence[2]) || !isCharacter(assSentence[2]) || !isString(assSentence[2]) || !isDecimal(assSentence[2])){
-                printf ("La cadena %s no pertenece a la estructura de asignación o no se encuentra en el orden correcto.", assSentence[2]);
-                printf ("\nNo se está escribiendo correctamente el parámetro a asignar.\n");
+                printf ("Falta el operador de asignación '='.\n");
+        } else if (!isNumber(assSentence[2]) && !isCharacter(assSentence[2]) && !isString(assSentence[2]) && !isDecimal(assSentence[2])){
+                printf ("El valor a asignar no es válido.\n");
+                printf ("Debe ser un número entero, un carácter, una cadena o un número decimal.\n");
         } else if (strcmp (assSentence[3], ";")!=0) {
-                printf ("La cadena %s no pertenece a la estructura de asignación o no se encuentra en el orden correcto.", assSentence[3]);
-                printf ("\nHace falta el punto y coma ';'.\n");
+                printf ("Falta el punto y coma ';' al final de la sentencia de asignación.\n");
 	}
+        printf("Recuerde que la estructura correcta de una asignación es:\n");
+        printf("variable = valor;\n");
 }
 
 void structureDecVar(char* decSentence[]){
         if (!validarExpresion(decSentence[1])) {
-                printf ("La cadena %s no pertenece a la estructura de declaración de variable o no se encuentra en el orden correcto.", decSentence[1]);
-                printf ("\nNo se está escribiendo correctamente el identificador de la variable.\n");
+                printf ("El identificador %s no es válido para declarar una variable.\n", decSentence[1]);
+                printf ("Los identificadores deben contener solo letras y números.\n");
 	} else if (strcmp (decSentence[2], ";")!=0) {
-                printf ("La cadena %s no pertenece a la estructura de declaración o no se encuentra en el orden correcto.", decSentence[2]);
-                printf ("\nHace falta el punto y coma ';'.\n");
+                printf ("Falta el punto y coma ';' al final de la declaración de variable.\n");
         }
+        printf("Recuerde que la estructura correcta para declarar una variable es:\n");
+        printf("tipo identificador;\n");
 }
 
 void structureFor(char* forSentence[]){
 	if(strcmp(forSentence[1], "(") != 0){
-		printf("Hace falta el símbolo '(' de apertura.\n");
+		printf("Falta el paréntesis de apertura '(' después de la palabra clave 'for'.\n");
 	} else if(strcmp(forSentence[2], "int") != 0){
-		printf("Hace falta inicializar la variable para recorrer el ciclo.\n");
+		printf("Debe inicializar una variable de control de tipo 'int' para el bucle for.\n");
 	} else if(!validarExpresion(forSentence[3])){
-		printf("No se está escribiendo correctamente el identificador de la variable.\n");
-		printf("Recuerde que los identificadores de variables pueden contener únicamente letras mayúsculas, minúsculas o números\n");
+		printf("El identificador %s no es válido para la variable de control del bucle for.\n", forSentence[3]);
+		printf("Los identificadores deben contener solo letras y números.\n");
 	} else if(strcmp(forSentence[4], "=") != 0){
-		printf("Hace falta el símbolo '=' que hace referencia a lo que se va asignar.\n");
+		printf("Falta el operador de asignación '=' para inicializar la variable de control.\n");
 	} else if(!isNumber(forSentence[5])){
-		printf("El valor a asignar no es un número entero.\n");
+		printf("El valor de inicialización de la variable de control debe ser un número entero.\n");
 	} else if(strcmp(forSentence[6], ";") != 0){
-		printf("Hace falta el símbolo ';' para terminar la primera parte de la estructura de la expresión 'for'.\n");
+		printf("Falta el punto y coma ';' después de la inicialización de la variable de control.\n");
 	} else if(!validarExpresion(forSentence[7])){
-		printf("No se está escribiendo correctamente el identificador de la variable.\n");
-		printf("Recuerde que los identificadores de variables pueden contener únicamente letras mayúsculas, minúsculas o números\n");
+		printf("El identificador %s no es válido para la condición del bucle for.\n", forSentence[7]);
+		printf("Los identificadores deben contener solo letras y números.\n");
 	} else if((strcmp(forSentence[8], "<") != 0) && (strcmp(forSentence[8], ">") != 0) && (strcmp(forSentence[8], "<=") != 0) && (strcmp(forSentence[8], ">=") != 0)){
-		printf("Hace falta un operador que permita que el ciclo se siga ejecutando.\n");
-		printf("Recuerda que los operadores más utilizados para las estructuras de control son '<','>','<=','>='.\n");
+		printf("Falta un operador relacional válido para la condición del bucle for.\n");
+		printf("Los operadores relacionales permitidos son: '<', '>', '<=', '>='.\n");
 	} else if(!validarExpresion(forSentence[9])){
-		printf("No se está escribiendo correctamente el identificador de la variable.\n");
-		printf("Recuerde que los identificadores de variables pueden contener únicamente letras mayúsculas, minúsculas o números\n");
+		printf("El identificador %s no es válido para la condición del bucle for.\n", forSentence[9]);
+		printf("Los identificadores deben contener solo letras y números.\n");
 	} else if(strcmp(forSentence[10], ";") != 0){
-		printf("Hace falta el símbolo ';' para terminar la segunda parte de la estructura de la expresión 'for'.\n");
+		printf("Falta el punto y coma ';' después de la condición del bucle for.\n");
 	} else if(!validarExpresion(forSentence[11])){
-		printf("No se está escribiendo correctamente el identificador de la variable.\n");
-		printf("Recuerde que los identificadores de variables pueden contener únicamente letras mayúsculas, minúsculas o números\n");
+		printf("El identificador %s no es válido para la expresión de incremento del bucle for.\n", forSentence[11]);
+		printf("Los identificadores deben contener solo letras y números.\n");
 	} else if((strcmp(forSentence[12], "++") != 0) && (strcmp(forSentence[12], "--") != 0)){
-		printf("Hace falta un operador que permita actualizar el valor de la variable.\n");
-		printf("Recuerda que los operadores más utilizados para alterar el valor de una variable son '++', '--'.\n");
+		printf("Falta un operador de incremento válido para la variable de control del bucle for.\n");
+		printf("Los operadores de incremento permitidos son: '++', '--'.\n");
 	} else if(strcmp(forSentence[13], ")") != 0){
-		printf("Hace falta el símbolo ')' para cerrar la estructura del 'for'.\n");
+		printf("Falta el paréntesis de cierre ')' después de la expresión de incremento del bucle for.\n");
 	} else if (strcmp (forSentence[14], "{")!=0) {
-                printf ("La cadena %s no pertenece a la estructura del for", forSentence[14]);
-                printf ("\nHace falta el corchete de apertura para identificar las sentencias del for. \n");
+                printf ("Falta la llave de apertura '{' para iniciar el bloque de código del bucle for.\n");
         } else if (strcmp (forSentence[15], "}")!=0) {
-                printf ("La cadena %s no pertenece a la estructura del for", forSentence[15]);
-                printf ("\nHace falta el corchete de cierre para identificar las sentencias del for. \n");
+                printf ("Falta la llave de cierre '}' para finalizar el bloque de código del bucle for.\n");
         }
-	printf ("Recuerde que la estructura del for es la siguiente: \n");
-	printf ("for ( int a = 0 ; a < var ; i ++ ) { } \n"); 
+	printf ("Recuerde que la estructura correcta del bucle for es: \n");
+	printf ("for (int variable = valor; variable < limite; variable++) { ... }\n"); 
 }
 
 void structureInitVar(char* decSentence[]) {
 if (validarExpresion(decSentence[1])) {
         if (contarPalabras(lineptr)<=5) {
             if (strcmp(decSentence[2], "=")!=0) {
-                printf ("La cadena %s no pertenece a la estructura de inicialización o no se encuentra en el orden correcto.", decSentence[2]);
-                printf ("\nHace falta el símbolo '=' que hace referencia a lo que se va asignar.\n");
+                printf ("Falta el operador de asignación '=' para inicializar la variable.\n");
             } else if (!isString(decSentence[3])) {
-                printf ("La cadena %s no pertenece a la estructura de inicialización o no se encuentra en el orden correcto.", decSentence[3]);
-                printf ("\nNo se está escribiendo correctamente el parámetro a asignar.\n");
+                printf ("El valor de inicialización debe ser una cadena entre comillas dobles \"...\".\n");
             } else if (strcmp(decSentence[4], ";")!=0) {
-                printf ("La cadena %s no pertenece a la estructura de inicialización o no se encuentra en el orden correcto.", decSentence[4]);
-                printf ("\nHace falta el punto y coma ';'.\n");
+                printf ("Falta el punto y coma ';' al final de la inicialización de variable.\n");
             }
         } else if ((contarPalabras(lineptr)>5) && (contarPalabras(lineptr)<=7)) {
 		if (strcmp(decSentence[2], "[")!=0) {
-                	printf ("La cadena %s no pertenece a la estructura de inicialización o no se encuentra en el orden correcto.", decSentence[2]);
-                	printf ("\nHace falta el símbolo '[' que referencia la llave de inicio del arreglo de strings.\n");
+                	printf ("Falta el corchete de apertura '[' para iniciar el índice del arreglo.\n");
             	} else if (strcmp(decSentence[3], "]")!=0) {
-                	printf ("La cadena %s no pertenece a la estructura de inicialización o no se encuentra en el orden correcto.", decSentence[3]);
-                	printf ("\nHace falta el símbolo ']' que referencia la llave de cierre del arreglo de strings.\n");
+                	printf ("Falta el corchete de cierre ']' para finalizar el índice del arreglo.\n");
             	} else if (strcmp(decSentence[4], "=")!=0) {
-                	printf ("La cadena %s no pertenece a la estructura de inicialización o no se encuentra en el orden correcto.", decSentence[4]);
-                	printf ("\nHace falta el símbolo '=' que hace referencia a lo que se va asignar.\n");
+                	printf ("Falta el operador de asignación '=' para inicializar el arreglo.\n");
             	} else if (!isString(decSentence[5])) {
-               		printf ("La cadena %s no pertenece a la estructura de inicialización o no se encuentra en el orden correcto.", decSentence[5]);
-                	printf ("\nNo se está escribiendo correctamente el parámetro a asignar.\n");
+               		printf ("El valor de inicialización del arreglo debe ser una cadena entre comillas dobles \"...\".\n");
             	} else if (strcmp(decSentence[6], ";")!=0) {
-                	printf ("La cadena %s no pertenece a la estructura de inicialización o no se encuentra en el orden correcto.", decSentence[6]);
-                	printf ("\nHace falta el punto y coma ';'.\n");
+                	printf ("Falta el punto y coma ';' al final de la inicialización del arreglo.\n");
 	}
 } else {
-       printf ("La cadena %s no pertenece a la estructura de declaración de variable o no se encuentra en el orden correcto.", decSentence[1]);
-       printf ("\nNo se está escribiendo correctamente el identificador de la variable.\n");
+       printf ("El identificador %s no es válido para declarar una variable.\n", decSentence[1]);
+       printf ("Los identificadores deben contener solo letras y números.\n");
     }
+    printf("Recuerde que la estructura correcta para inicializar una variable es:\n");
+    printf("tipo identificador = valor;\n");
+    printf("Para inicializar un arreglo, la estructura es:\n");
+    printf("tipo identificador[tamaño] = valor;\n");
 }
 }
 
 void structureLibrarie (char* decSentence[]) {
-	printf("Se está escribiendo incorrectamente el valor de la líbreria, deber ser <nombre.h>.\n");
+	printf("La sintaxis para incluir una librería es incorrecta.\n");
+        printf("Recuerde que la estructura correcta es: #include <nombre_libreria.h>\n");
 }
 
 
@@ -467,12 +476,13 @@ void yyerror(const char *s) {
 	char* elementList[30];
 	int counter = 0;
 	getElements(s2, elementList, &counter);
-	printf("Error sintáctico en la línea %d columna %d: el carácter: %s no se esperaba en esta posición.\n", yylineno,colum, yytext); 
+	printf("Error de sintaxis en la línea %d, columna %d: el token %s no es válido en esta posición.\n", yylineno,colum, yytext);
 	fprintf(stderr,"%s", lineptr);
 	for(int i = 0; i < colum - 1; i++)
         	fprintf(stderr,"_");
 	fprintf(stderr,"^\n");       
 	identifyStructure(elementList);
+        printf("Revise la estructura de la sentencia y corrija los errores.\n");
 }
 
 
